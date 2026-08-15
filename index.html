@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="tk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALSAT COIN — Jeton Alyş-Satyş Merkezi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e1016;
+    --panel:#161922;
+    --panel-2:#1d212c;
+    --line: rgba(230,224,208,0.12);
+    --gold:#d4af6a;
+    --gold-bright:#f0cf8e;
+    --cream:#ece7da;
+    --dim:#8b8f9c;
+    --green:#7fb88a;
+    --red:#c96a5a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(212,175,106,0.10), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(212,175,106,0.06), transparent 55%),
+      var(--ink);
+    color:var(--cream);
+    font-family:'Manrope', sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .display{font-family:'Fraunces', serif;}
+
+  /* ---------- ticker ---------- */
+  .ticker-wrap{
+    border-bottom:1px solid var(--line);
+    background:var(--panel);
+    overflow:hidden;
+    white-space:nowrap;
+    padding:9px 0;
+  }
+  .ticker{
+    display:inline-block;
+    padding-left:100%;
+    animation:scroll 28s linear infinite;
+    font-size:13px;
+    letter-spacing:0.02em;
+    color:var(--dim);
+  }
+  .ticker b{color:var(--gold-bright); font-weight:700;}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-100%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker{animation:none; padding-left:2%;}
+  }
+
+  /* ---------- header ---------- */
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 6vw;
+    max-width:1180px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .coin-mark{
+    width:38px; height:38px; border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, var(--gold-bright), var(--gold) 55%, #8a6a30 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-weight:900; color:var(--ink); font-size:17px;
+    box-shadow:0 0 0 1px rgba(212,175,106,0.35), 0 6px 18px rgba(212,175,106,0.15);
+  }
+  .brand-name{font-family:'Fraunces', serif; font-weight:700; font-size:20px; letter-spacing:0.01em;}
+  .brand-name span{color:var(--gold-bright);}
+  nav a{font-size:14px; color:var(--dim); margin-left:28px; transition:color .2s;}
+  nav a:hover{color:var(--cream);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    max-width:1180px; margin:0 auto;
+    padding:64px 6vw 40px;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
+  }
+  .eyebrow{
+    font-size:12.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold);
+    display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--gold);}
+  h1{
+    font-size:clamp(34px, 4.4vw, 58px);
+    line-height:1.06;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  h1 em{font-style:italic; color:var(--gold-bright); font-weight:600;}
+  .lede{
+    margin-top:22px; font-size:16.5px; line-height:1.7; color:var(--dim); max-width:46ch;
+  }
+  .cta-row{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .btn{
+    padding:14px 26px; border-radius:3px; font-weight:700; font-size:14.5px;
+    display:inline-flex; align-items:center; gap:10px; transition:all .2s ease; border:1px solid transparent;
+  }
+  .btn-buy{background:var(--gold); color:var(--ink);}
+  .btn-buy:hover{background:var(--gold-bright); transform:translateY(-1px);}
+  .btn-sell{border-color:var(--line); color:var(--cream);}
+  .btn-sell:hover{border-color:var(--gold); color:var(--gold-bright);}
+
+  .hero-token{
+    position:relative; aspect-ratio:1/1; max-width:340px; justify-self:center;
+  }
+  .hero-token .ring{
+    position:absolute; inset:0; border-radius:50%;
+    border:1px dashed rgba(212,175,106,0.35);
+    animation:spin 40s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .hero-token .ring{animation:none;} }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero-token .coin{
+    position:absolute; inset:14%;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 34% 26%, var(--gold-bright), var(--gold) 45%, #7d5f2a 100%);
+    box-shadow:
+      0 0 0 1px rgba(212,175,106,0.4),
+      inset 0 0 0 10px rgba(14,16,22,0.12),
+      0 30px 70px -20px rgba(212,175,106,0.35);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-weight:900; color:rgba(14,16,22,0.85);
+    font-size:15px; letter-spacing:0.08em; text-align:center;
+  }
+
+  /* ---------- section shell ---------- */
+  section{max-width:1180px; margin:0 auto; padding:70px 6vw;}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:34px; flex-wrap:wrap; gap:12px;}
+  .section-head h2{font-family:'Fraunces', serif; font-size:clamp(24px,2.6vw,32px); font-weight:600;}
+  .section-head p{color:var(--dim); font-size:14px;}
+
+  /* ---------- how / cards ---------- */
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:28px;
+  }
+  .card .num{font-family:'Fraunces', serif; color:var(--gold); font-size:13px; letter-spacing:0.1em; margin-bottom:14px;}
+  .card h3{font-size:17px; margin-bottom:10px; font-weight:700;}
+  .card p{font-size:14px; color:var(--dim); line-height:1.65;}
+  .card a.link-out{display:inline-block; margin-top:16px; font-size:13.5px; color:var(--gold-bright); border-bottom:1px solid rgba(240,207,142,0.35);}
+
+  /* ---------- announcements ---------- */
+  .announce-list{display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;}
+  .announce-item{background:var(--panel); padding:22px 24px;}
+  .announce-item .meta{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
+  .announce-item .meta .tag{font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(212,175,106,0.35); padding:3px 9px; border-radius:20px;}
+  .announce-item .meta time{font-size:12px; color:var(--dim);}
+  .announce-item h4{font-size:16.5px; font-weight:700; margin-bottom:6px;}
+  .announce-item p{font-size:14px; color:var(--dim); line-height:1.6;}
+  .empty-state{padding:40px 24px; text-align:center; color:var(--dim); font-size:14px; background:var(--panel); border:1px solid var(--line); border-radius:6px;}
+
+  /* ---------- contact ---------- */
+  .contact-band{
+    background:var(--panel-2); border:1px solid var(--line); border-radius:8px;
+    padding:38px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
+  }
+  .contact-band h3{font-family:'Fraunces', serif; font-size:22px; font-weight:600; margin-bottom:6px;}
+  .contact-band p{color:var(--dim); font-size:14px;}
+
+  footer{
+    border-top:1px solid var(--line); padding:30px 6vw; max-width:1180px; margin:0 auto;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  }
+  footer p{font-size:12.5px; color:var(--dim);}
+  .admin-trigger{font-size:12px; color:var(--dim); border-bottom:1px dotted var(--dim); cursor:pointer; background:none; border-top:none; border-left:none; border-right:none; font-family:inherit;}
+  .admin-trigger:hover{color:var(--gold-bright);}
+
+  /* ---------- modal ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(9,10,14,0.72); backdrop-filter:blur(3px);
+    display:none; align-items:center; justify-content:center; z-index:50; padding:20px;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:var(--panel); border:1px solid var(--line); border-radius:8px; width:100%; max-width:440px;
+    padding:30px; position:relative;
+  }
+  .modal h3{font-family:'Fraunces', serif; font-size:19px; margin-bottom:6px;}
+  .modal .sub{font-size:13px; color:var(--dim); margin-bottom:22px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:12.5px; color:var(--dim); margin-bottom:7px; letter-spacing:0.02em;}
+  .field input, .field textarea{
+    width:100%; background:var(--ink); border:1px solid var(--line); border-radius:4px;
+    padding:11px 13px; color:var(--cream); font-family:inherit; font-size:14px;
+  }
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--gold);}
+  .field textarea{resize:vertical; min-height:80px;}
+  .modal .row{display:flex; gap:10px; margin-top:22px;}
+  .modal .row button{flex:1; padding:12px; border-radius:4px; font-weight:700; font-size:14px; border:1px solid var(--line); background:none; color:var(--cream); cursor:pointer; transition:all .2s;}
+  .modal .row button.primary{background:var(--gold); color:var(--ink); border-color:var(--gold);}
+  .modal .row button.primary:hover{background:var(--gold-bright);}
+  .modal .row button:not(.primary):hover{border-color:var(--dim);}
+  .close-x{position:absolute; top:16px; right:18px; background:none; border:none; color:var(--dim); font-size:20px; cursor:pointer; line-height:1;}
+  .close-x:hover{color:var(--cream);}
+  .msg{font-size:13px; margin-top:4px; min-height:16px;}
+  .msg.err{color:var(--red);}
+  .msg.ok{color:var(--green);}
+
+  @media (max-width: 860px){
+    .hero{grid-template-columns:1fr; padding-top:40px;}
+    .hero-token{order:-1; max-width:220px;}
+    .grid-3{grid-template-columns:1fr;}
+    nav{display:none;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="ticker-wrap">
+    <div class="ticker">💰 <b>ALSAT COIN</b> — jeton söwdasy indi has ýeňil &nbsp;&nbsp;•&nbsp;&nbsp; ✅ Almak we satmak üçin ynamdar toparlar &nbsp;&nbsp;•&nbsp;&nbsp; 📢 Duýuruları yzarlaň &nbsp;&nbsp;•&nbsp;&nbsp; ✅ Telegram arkaly göni habarlaşyň &nbsp;&nbsp;•&nbsp;&nbsp; 💰 <b>ALSAT COIN</b> — jeton söwdasy indi has ýeňil &nbsp;&nbsp;•&nbsp;&nbsp;</div>
+  </div>
+
+  <header>
+    <div class="brand">
+      <div class="coin-mark">A</div>
+      <div class="brand-name">ALSAT<span>COIN</span></div>
+    </div>
+    <nav>
+      <a href="#nadip">Nädip işleýär</a>
+      <a href="#duyurylar">Duýurylar</a>
+      <a href="#habarlasmak">Habarlaşmak</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Premium jeton söwda merkezi</div>
+      <h1>Jetonyňyzy <em>ynamly</em><br>alyň, ynamly satyň.</h1>
+      <p class="lede">ALSAT COIN — jeton alyş-satyş işini bir ýerden dolandyrýan platforma. Almak isleseňiz alyjy toparyna, satmak isleseňiz satyjy toparyna goşulyň, ähli täzelikleri şu sahypadaky duýurylardan yzarlaň.</p>
+      <div class="cta-row">
+        <a class="btn btn-buy" href="https://tiktok.me/group/ZSVL6qP7P/" target="_blank" rel="noopener">Jeton almak →</a>
+        <a class="btn btn-sell" href="https://tiktok.me/group/ZSVLMG2Rk/" target="_blank" rel="noopener">Jeton satmak →</a>
+      </div>
+    </div>
+    <div class="hero-token">
+      <div class="ring"></div>
+      <div class="coin">ALSAT<br>COIN</div>
+    </div>
+  </div>
+
+  <section id="nadip">
+    <div class="section-head">
+      <h2>Nädip işleýär</h2>
+      <p>Üç ädimde başlaň</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>Toparyňyzy saýlaň</h3>
+        <p>Jeton almak isleýän bolsaňyz alyjy toparyna, satmak isleýän bolsaňyz satyjy toparyna goşulyň.</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>Duýurylary okaň</h3>
+        <p>Bahalar, şertler we täzelikler barada iň soňky maglumat şu sahypanyň Duýurylar bölüminde çap edilýär.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>Telegram arkaly ylalaşyň</h3>
+        <p>Sorag-jogap we jikme-jik ylalaşyklar üçin göni Telegram kanalyndan habarlaşyň.</p>
+        <a class="link-out" href="https://t.me/hanvpn00" target="_blank" rel="noopener">@hanvpn00 →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="duyurylar">
+    <div class="section-head">
+      <h2>Duýurylar</h2>
+      <p id="count-label">Ýüklenýär…</p>
+    </div>
+    <div id="announce-list" class="announce-list"></div>
+  </section>
+
+  <section id="habarlasmak">
+    <div class="contact-band">
+      <div>
+        <h3>Sowal barmy?</h3>
+        <p>Telegram kanalymyza ýazyň, size gysga wagtda jogap bereris.</p>
+      </div>
+      <a class="btn btn-buy" href="https://t.me/hanvpn00" target="_blank" rel="noopener">Telegrama ýaz →</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 ALSAT COIN. Ähli hukuklar goralan.</p>
+    <button class="admin-trigger" id="admin-open">Duýuru goş</button>
+  </footer>
+
+  <!-- Modal -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <button class="close-x" id="modal-close">✕</button>
+
+      <div id="step-password">
+        <h3>Dolandyryjy girişi</h3>
+        <p class="sub">Duýuru goşmak üçin şifri giriziň.</p>
+        <div class="field">
+          <label for="pwd">Şifr</label>
+          <input type="password" id="pwd" placeholder="••••••••" autocomplete="off">
+        </div>
+        <p class="msg err" id="pwd-msg"></p>
+        <div class="row">
+          <button id="pwd-cancel">Ýapmak</button>
+          <button class="primary" id="pwd-submit">Girmek</button>
+        </div>
+      </div>
+
+      <div id="step-form" style="display:none;">
+        <h3>Täze duýuru</h3>
+        <p class="sub">Bu duýuru ähli myhmanlara görkeziler.</p>
+        <div class="field">
+          <label for="a-title">Sözbaşy</label>
+          <input type="text" id="a-title" placeholder="Meselem: Täze bahalar güýje girdi">
+        </div>
+        <div class="field">
+          <label for="a-body">Duýurynyň teksti</label>
+          <textarea id="a-body" placeholder="Jikme-jiklikleri şu ýere ýazyň…"></textarea>
+        </div>
+        <p class="msg" id="form-msg"></p>
+        <div class="row">
+          <button id="form-cancel">Ýatyr</button>
+          <button class="primary" id="form-submit">Çap et</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const ADMIN_CODE_HASH = "43614b2a9e1d3f946c4c717002f412d0bfdfdf078c5c3d7546ecf3e47e38ccda"; // şifriň özi bu ýerde ýazylmaýar, diňe onuň hash-y
+const STORAGE_KEY = "announcements";
+
+async function sha256Hex(text){
+  const enc = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+const overlay = document.getElementById('overlay');
+const stepPassword = document.getElementById('step-password');
+const stepForm = document.getElementById('step-form');
+const pwdInput = document.getElementById('pwd');
+const pwdMsg = document.getElementById('pwd-msg');
+const formMsg = document.getElementById('form-msg');
+const listEl = document.getElementById('announce-list');
+const countLabel = document.getElementById('count-label');
+
+function openModal(){
+  overlay.classList.add('open');
+  stepPassword.style.display = 'block';
+  stepForm.style.display = 'none';
+  pwdInput.value = '';
+  pwdMsg.textContent = '';
+  setTimeout(()=>pwdInput.focus(), 50);
+}
+function closeModal(){
+  overlay.classList.remove('open');
+}
+
+document.getElementById('admin-open').addEventListener('click', openModal);
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('pwd-cancel').addEventListener('click', closeModal);
+document.getElementById('form-cancel').addEventListener('click', closeModal);
+overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+
+document.getElementById('pwd-submit').addEventListener('click', checkPassword);
+pwdInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') checkPassword(); });
+
+async function checkPassword(){
+  const entered = pwdInput.value.trim();
+  if(!entered) return;
+  pwdMsg.textContent = '';
+  const enteredHash = await sha256Hex(entered);
+  if(enteredHash === ADMIN_CODE_HASH){
+    stepPassword.style.display = 'none';
+    stepForm.style.display = 'block';
+    document.getElementById('a-title').focus();
+  } else {
+    pwdMsg.textContent = 'Şifr nädogry. Gaýtadan synanyşyň.';
+  }
+}
+
+document.getElementById('form-submit').addEventListener('click', submitAnnouncement);
+
+async function submitAnnouncement(){
+  const title = document.getElementById('a-title').value.trim();
+  const body = document.getElementById('a-body').value.trim();
+  if(!title || !body){
+    formMsg.className = 'msg err';
+    formMsg.textContent = 'Sözbaşy we tekst boş bolup bilmez.';
+    return;
+  }
+  formMsg.className = 'msg';
+  formMsg.textContent = 'Ýerleşdirilýär…';
+  try{
+    const existing = await loadAnnouncements();
+    const newItem = {
+      id: Date.now().toString(),
+      title, body,
+      date: new Date().toISOString()
+    };
+    const updated = [newItem, ...existing];
+    const res = await window.storage.set(STORAGE_KEY, JSON.stringify(updated), true);
+    if(!res){ throw new Error('save failed'); }
+    formMsg.className = 'msg ok';
+    formMsg.textContent = 'Duýury çap edildi!';
+    document.getElementById('a-title').value = '';
+    document.getElementById('a-body').value = '';
+    renderAnnouncements(updated);
+    setTimeout(closeModal, 700);
+  } catch(err){
+    formMsg.className = 'msg err';
+    formMsg.textContent = 'Näsazlyk ýüze çykdy, gaýtadan synanyşyň.';
+  }
+}
+
+async function loadAnnouncements(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, true);
+    if(res && res.value){
+      return JSON.parse(res.value);
+    }
+    return [];
+  }catch(err){
+    return [];
+  }
+}
+
+function formatDate(iso){
+  const d = new Date(iso);
+  const months = ['Ýan','Few','Mart','Apr','Maý','Iýun','Iýul','Awg','Sen','Okt','Noý','Dek'];
+  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function renderAnnouncements(items){
+  if(!items || items.length === 0){
+    listEl.innerHTML = '';
+    listEl.style.background = 'none';
+    listEl.style.border = 'none';
+    listEl.innerHTML = '<div class="empty-state">Häzirlikçe duýury ýok. Ilkinji duýurynyň çap edilmegine garaşylýar.</div>';
+    countLabel.textContent = '0 duýury';
+    return;
+  }
+  listEl.style.background = 'var(--line)';
+  listEl.style.border = '1px solid var(--line)';
+  countLabel.textContent = items.length + (items.length === 1 ? ' duýury' : ' duýury');
+  listEl.innerHTML = items.map(it => `
+    <div class="announce-item">
+      <div class="meta">
+        <span class="tag">Duýury</span>
+        <time>${formatDate(it.date)}</time>
+      </div>
+      <h4>${escapeHtml(it.title)}</h4>
+      <p>${escapeHtml(it.body)}</p>
+    </div>
+  `).join('');
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+(async function init(){
+  const items = await loadAnnouncements();
+  renderAnnouncements(items);
+})();
+</script>
+</body>
+</html>
